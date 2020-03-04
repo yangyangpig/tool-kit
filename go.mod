@@ -32,4 +32,10 @@ replace (
 	purifiers/cybros => gitlab.ttyuyin.com/purifiers/cybros v1.0.7
 )
 
-require golang.org/x/net v0.0.0-20191004110552-13f9640d40b9
+require (
+	github.com/0x5010/grpcp v0.0.0-20180912032145-6d4772332891 // indirect
+	github.com/golang/protobuf v1.3.2
+	golang.org/x/net v0.0.0-20191004110552-13f9640d40b9
+	google.golang.org/grpc v1.26.0
+
+)
