@@ -6,7 +6,7 @@ import (
 	"sync"
 )
 
-func main()  {
+func main() {
 	pool, err := task_pool.NewPool(func(option *task_pool.Option) {
 		option.InitWorkerNum = 10
 	})

@@ -2,8 +2,7 @@ package client
 
 import (
 	"context"
-	"fmt"
-	"gather/tool-kitcl/pkg/connect-pool/protocbuf"
+	"gather/tool-kitcl/demon/connect-pool/protocbuf"
 	"github.com/0x5010/grpcp"
 	"google.golang.org/grpc"
 	"log"
@@ -24,12 +23,11 @@ func NewHelloWorldClient() *HelloWorldCli {
 	}
 }
 
-func (c *HelloWorldCli) SayHello(ctx context.Context, in *tool_pkg_pool.HelloRequest) (*tool_pkg_pool.HelloResp, error)  {
+func (c *HelloWorldCli) SayHello(ctx context.Context, in *tool_pkg_pool.HelloRequest) (*tool_pkg_pool.HelloResp, error) {
 	resp, err := c.sub.SayHello(ctx, in)
 	if err != nil {
 		log.Printf("sayHello error %v", err)
 		return resp, err
 	}
-
-	fmt.Println(resp)
+	return resp, nil
 }

@@ -35,7 +35,7 @@ func NewPool(modOptions ...ModOption) (PoolInterface, error) {
 	}
 
 	var busyNum int64 = 0
-	initPool := &Pool{idleWorkerList:make([]*Worker,0)} // 临时值
+	initPool := &Pool{idleWorkerList: make([]*Worker, 0)} // 临时值
 	for i := 0; i < option.InitWorkerNum; i++ {
 		// 创建没有handle的channel的
 		w := NewWorker(initPool)
@@ -50,8 +50,6 @@ func NewPool(modOptions ...ModOption) (PoolInterface, error) {
 	}, nil
 
 }
-
-
 
 func (p *Pool) Fill(handle Handle) {
 	var w *Worker
