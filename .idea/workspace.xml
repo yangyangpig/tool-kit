@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be0ca656-7bf4-4aac-bdc8-24e9c6a26e0d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ci/Dockerfile-gnet" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demon/gnet/client/client.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demon/gnet/server/servser.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/tool-kit.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tool-kit.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demon/gnet/server/server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demon/gnet/server/servser.go" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
