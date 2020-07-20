@@ -1,0 +1,27 @@
+FROM golang:1.12.9-alpine as builder
+
+ENV NO_CGO=0
+ENV GOPROXY=https://gproxy.ttyuyin.com
+
+ARG build_path
+ARG output
+
+COPY . /$GOPATH/src/tool-kit
+
+# relative path tool-kit
+WORKDIR $GOPATH/src/tool-kit/$build_path
+
+RUN go build -o /go/bin/$output
+
+
+# build the runtime image
+FROM alpine:3.11
+
+ARG output
+
+COPY --from builder /go/bin/$output /$output
+
+ENV output $output
+
+CMD /$output -v
+

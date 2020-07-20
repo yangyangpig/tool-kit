@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be0ca656-7bf4-4aac-bdc8-24e9c6a26e0d" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/demon/goroutine-pool/main.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/demon/goroutine-pool/use-case/case.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/demon/goroutine-pool/use-case/common_use.go" afterDir="false" />
@@ -16,6 +17,11 @@
       <change beforePath="$PROJECT_DIR$/pkg/connect-pool/protocbuf/helloworld.proto" beforeDir="false" afterPath="$PROJECT_DIR$/demon/connect-pool/protocbuf/helloworld.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/connect-pool/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/demon/connect-pool/server/server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/task-pool/pool.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/task-pool/pool.go" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/demon/gnet/server/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demon/gnet/server/servser.go" beforeDir="false" />
+>>>>>>> da5744020409ae23e969ae6e0dee8ff88745a4fb
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,6 +29,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
@@ -111,6 +118,8 @@
       </file>
     </leaf>
   </component>
+=======
+>>>>>>> da5744020409ae23e969ae6e0dee8ff88745a4fb
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -132,6 +141,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< HEAD
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -213,6 +223,14 @@
       <pane id="Scope" />
     </panes>
   </component>
+=======
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="y" value="23" />
+    <option name="width" value="1225" />
+    <option name="height" value="713" />
+  </component>
+  <component name="ProjectId" id="1ZWDU5hf3E3opXV0LnDerbYx1wc" />
+>>>>>>> da5744020409ae23e969ae6e0dee8ff88745a4fb
   <component name="PropertiesComponent">
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -247,13 +265,36 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="Go Build.go build main.go">
     <configuration name="go build main.go (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+=======
+  <component name="RunManager" selected="Go Build.go build gather/tool-kitcl/demon/gnet/client">
+    <configuration name="go build conn.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+>>>>>>> da5744020409ae23e969ae6e0dee8ff88745a4fb
       <module name="tool-kit" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
       <filePath value="$PROJECT_DIR$/demon/connect-pool/main.go" />
       <package value="gather/tool-kitcl" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build gather/tool-kitcl/demon/gnet/client" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="tool-kit" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/demon/gnet/client/client.go" />
+      <package value="gather/tool-kitcl/demon/gnet/client" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build gather/tool-kitcl/demon/gnet/server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="tool-kit" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/demon/gnet/server/servser.go" />
+      <package value="gather/tool-kitcl/demon/gnet/server" />
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
@@ -301,6 +342,12 @@
     </configuration>
     <recent_temporary>
       <list>
+<<<<<<< HEAD
+=======
+        <item itemvalue="Go Build.go build gather/tool-kitcl/demon/gnet/client" />
+        <item itemvalue="Go Build.go build gather/tool-kitcl/demon/gnet/server" />
+        <item itemvalue="Go Build.go build conn.go" />
+>>>>>>> da5744020409ae23e969ae6e0dee8ff88745a4fb
         <item itemvalue="Go Build.go build main.go" />
         <item itemvalue="Go Build.go build main.go (1)" />
         <item itemvalue="Go Test.TestHWServerWithGrpcp in gather/tool-kitcl/pkg/grpcp" />
@@ -309,6 +356,7 @@
       </list>
     </recent_temporary>
   </component>
+<<<<<<< HEAD
   <component name="TestHistory">
     <history-entry file="BenchmarkHelloWorldCli_SayHello_in_gather_tool-kitcl_demon_connect-pool_client - 2020.03.05 at 22h 14m 24s.xml">
       <configuration name="BenchmarkHelloWorldCli_SayHello in gather/tool-kitcl/demon/connect-pool/client" configurationId="GoTestRunConfiguration" />
@@ -368,12 +416,28 @@
       <window_info anchor="right" id="Coverage" order="4" side_tool="true" weight="0.32960597" />
     </layout>
   </component>
+=======
+>>>>>>> da5744020409ae23e969ae6e0dee8ff88745a4fb
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
     <proxy>https://goproxy.ttyuyin.com</proxy>
+<<<<<<< HEAD
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -715,5 +779,7 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> da5744020409ae23e969ae6e0dee8ff88745a4fb
   </component>
 </project>

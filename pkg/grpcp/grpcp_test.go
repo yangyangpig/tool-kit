@@ -1,16 +1,5 @@
 package grpcp
 
-/*
- *
- * Created by 0x5010 on 2018/06/20.
- * grpcp
- * https://github.com/0x5010/grpcp
- *
- * Copyright 2018 0x5010.
- * Licensed under the MIT license.
- *
- */
-
 import (
 	"context"
 	"fmt"

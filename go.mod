@@ -35,11 +35,11 @@ replace (
 require (
 	github.com/0x5010/grpcp v0.0.0-20180912032145-6d4772332891
 	github.com/golang/protobuf v1.3.2
+	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
 	github.com/panjf2000/ants/v2 v2.3.1
-	github.com/panjf2000/gnet v1.0.0 // indirect
-	github.com/stretchr/objx v0.2.0 // indirect
+	github.com/panjf2000/gnet v1.0.0
 	github.com/stretchr/testify v1.5.1 // indirect
-	golang.org/x/net v0.0.0-20191004110552-13f9640d40b9
+	golang.org/x/net v0.0.0-20191004110552-13f9640d40b9 // indirect
 	google.golang.org/grpc v1.26.0
 	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect
 	gopkg.in/yaml.v2 v2.2.8 // indirect

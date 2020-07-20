@@ -1,16 +1,5 @@
 package grpcp
 
-/*
- *
- * Created by 0x5010 on 2018/06/20.
- * grpcp
- * https://github.com/0x5010/grpcp
- *
- * Copyright 2018 0x5010.
- * Licensed under the MIT license.
- *
- */
-
 import (
 	"context"
 	"fmt"
@@ -120,6 +109,7 @@ func (ct *ConnectionTracker) getConn(addr string, force bool) (*grpc.ClientConn,
 	ct.Lock()
 	tc, ok := ct.connections[addr]
 	if !ok {
+		// addr first on the local cache, so init the trackedConn struct
 		tc = &trackedConn{
 			addr:    addr,
 			tracker: ct,
@@ -274,6 +264,7 @@ func (tc *trackedConn) heartbeat(ctx context.Context) {
 		select {
 		case <-ctx.Done():
 			tc.shutdown()
+			// TODO 删除connection的对应地址的数据
 			break
 		case <-ticker.C:
 			tc.healthCheck(ctx)
