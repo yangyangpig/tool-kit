@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package gather.toolkitcl.protocol;
+
+option go_package = "avatar;avatar";
+
+service Avatar {
+    rpc GetAvatarUploadUrl(GetAvatarUploadUrlReq) returns (GetAvatarUploadUrlResp);
+
+    rpc SaveAvatar(SaveAvatarReq) returns (SaveAvatarResp);
+
+    rpc GetAvatar(GetAvatarReq) returns (GetAvatarResp);
+
+    rpc BatchGetAvatar(BatchGetAvatarReq) returns (BatchGetAvatarResp);
+}
+
+enum OssType {
+    OSS_TYPE_UNDEFINED = 0;
+    ALIYUN = 1; // 目前只有一个,预留字段
+}
+
+message DownloadUrl {
+    string resize_url = 1;
+    string circle_url = 2;
+    string raw_url = 3;     // 原图
+
+    string object_key = 4;  // 存在oss里的key(a.k.a 头像版本)
+}
+
+message GetAvatarUploadUrlReq {
+    uint64 vid = 1; // 根据不同类型传不同id
+    AvatarType avatar_type = 2;
+}
+
+message GetAvatarUploadUrlResp {
+    string upload_url = 1;
+    uint64 upload_expire = 2;
+    string object_key = 3;
+}
+
+enum AvatarType {
+    AVATAR_TYPE_UNDEFINED = 0;
+    USER = 1; //user avatar
+    GROUP = 2; // group avatar
+    CHANNEL = 3; //channel avatar
+}
+
+message SaveAvatarReq {
+    uint64 vid = 1; // 根据不同类型传不同id
+    AvatarType avatar_type = 2;
+    string object_key = 3;
+}
+
+message SaveAvatarResp {
+    DownloadUrl download_url = 1;
+}
+
+message GetAvatarReq {
+    uint64 vid = 1; // 根据不同类型传不同id
+    AvatarType avatar_type = 2;
+    bool object_key_only = 3;
+}
+
+message GetAvatarResp {
+    DownloadUrl download_url = 1; //key为规格 value为下载连接
+}
+
+message BatchGetAvatarReq {
+    repeated uint64 vid_list = 1;
+    AvatarType avatar_type = 2;
+    bool object_key_only = 3;
+}
+
+message BatchGetAvatarResp {
+    map<uint64, DownloadUrl> download_url_list = 1;
+}

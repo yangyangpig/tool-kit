@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+package gather.toolkitcl.protocol;
+
+option go_package = "album;album";
+
+import "avatar.proto";
+
+service Album {
+
+    rpc GetAlbumUploadUrl(GetAlbumUploadUrlReq) returns (GetAlbumUploadUrlResp);
+
+    rpc SaveAlbumPhotos(SaveAlbumPhotosReq) returns (SaveAlbumPhotosResp);
+
+    rpc GetAlbumPhotos(GetAlbumPhotosReq) returns (GetAlbumPhotosResp);
+
+    rpc GetAlbumPhotosBatch(GetAlbumPhotosBatchReq) returns (GetAlbumPhotosBatchResp);
+
+    rpc DeleteAlbumPhotos(DeleteAlbumPhotosReq) returns (DeleteAlbumPhotosResp);
+
+    rpc GetAlbumPhotoCount(GetAlbumPhotoCountReq) returns (GetAlbumPhotoCountResp);
+}
+
+enum AlbumPrivacy {
+    ALBUM_PRIVACY_UNDEFINED = 0;
+    OPEN = 1;
+    CLOSE = 2;
+}
+
+//enum OssType {
+//    OSS_TYPE_UNDEFINED = 0;
+//    ALIYUN = 1; // 目前只有一个,预留字段
+//}
+
+message GetAlbumUploadUrlReq {
+    uint64 uid = 1;
+    uint32 photo_num = 2;
+}
+
+message UrlInfo {
+    string url = 1;
+    uint64 expire_time = 2;
+    string object_key = 3;
+}
+
+message GetAlbumUploadUrlResp {
+    repeated UrlInfo upload_url= 1;
+}
+
+message SaveAlbumPhotosReq {
+    uint64 uid = 1;
+    repeated string object_key = 2;
+}
+
+message SaveAlbumPhotosResp {
+    repeated UrlInfo download_url= 1;
+    map<string, uint64> photo_id_result = 2;
+}
+
+message Photo {
+    uint64 photo_id = 1;
+    string url = 2;
+    uint64 create_at = 3; // 客户端可以需要按照创建时间分类
+}
+
+message GetAlbumPhotosReq {
+    uint64 uid = 1;
+}
+
+message GetAlbumPhotosResp {
+     repeated Photo photo_info = 1;
+}
+
+message GetAlbumPhotosBatchReq {
+    repeated uint64 uids = 1;
+}
+
+message PhotoList {
+    repeated Photo photo_info = 1;
+}
+
+message GetAlbumPhotosBatchResp {
+    map<uint64, PhotoList> photos_map = 1;
+}
+
+message DeleteAlbumPhotosReq {
+    uint64 uid = 1;
+    repeated uint64 photo_id = 2;
+}
+message DeleteAlbumPhotosResp {}
+
+message GetAlbumPhotoCountReq {
+    uint64 uid = 1;
+}
+
+message GetAlbumPhotoCountResp {
+    uint32 count = 1;
+}
+
+message OtherUrl {
+    DownloadUrl url = 1;
+}
