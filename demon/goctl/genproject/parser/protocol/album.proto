@@ -1,0 +1,127 @@
+syntax = "proto3";
+
+package protocol;
+
+option go_package = "album;album";
+
+import "protocol/avatar.proto";
+import "google/protobuf/any.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/wrappers.proto";
+
+service Album {
+
+    rpc GetAlbumUploadUrl(GetAlbumUploadUrlReq) returns (GetAlbumUploadUrlResp);
+
+    rpc SaveAlbumPhotos(SaveAlbumPhotosReq) returns (SaveAlbumPhotosResp);
+
+    rpc GetAlbumPhotos(GetAlbumPhotosReq) returns (GetAlbumPhotosResp);
+
+    rpc GetAlbumPhotosBatch(GetAlbumPhotosBatchReq) returns (GetAlbumPhotosBatchResp);
+
+    rpc DeleteAlbumPhotos(DeleteAlbumPhotosReq) returns (DeleteAlbumPhotosResp);
+
+    rpc GetAlbumPhotoCount(GetAlbumPhotoCountReq) returns (GetAlbumPhotoCountResp);
+}
+
+enum AlbumPrivacy {
+    ALBUM_PRIVACY_UNDEFINED = 0;
+    OPEN = 1;
+    CLOSE = 2;
+}
+
+//enum OssType {
+//    OSS_TYPE_UNDEFINED = 0;
+//    ALIYUN = 1; // 目前只有一个,预留字段
+//}
+
+message TestWellKnownTypes {
+    google.protobuf.Timestamp start_time = 1;
+    google.protobuf.Duration elapsed = 2;
+
+    google.protobuf.DoubleValue dbl = 3;
+    google.protobuf.FloatValue flt = 4;
+    google.protobuf.BoolValue bl = 5;
+    google.protobuf.Int32Value i32 = 6;
+    google.protobuf.Int64Value i64 = 7;
+    google.protobuf.UInt32Value u32 = 8;
+    google.protobuf.UInt64Value u64 = 9;
+    google.protobuf.StringValue str = 10;
+    google.protobuf.BytesValue byt = 11;
+
+    repeated google.protobuf.Value json = 12;
+
+    repeated google.protobuf.Any extras = 13;
+}
+
+message GetAlbumUploadUrlReq {
+    uint64 uid = 1;
+    uint32 photo_num = 2;
+    TestWellKnownTypes google_well_know_types = 5;
+}
+
+message UrlInfo {
+    string url = 1;
+    uint64 expire_time = 2;
+    string object_key = 3;
+}
+
+message GetAlbumUploadUrlResp {
+    repeated UrlInfo upload_url= 1;
+}
+
+message SaveAlbumPhotosReq {
+    uint64 uid = 1;
+    repeated string object_key = 2;
+}
+
+message SaveAlbumPhotosResp {
+    repeated UrlInfo download_url= 1;
+    map<string, uint64> photo_id_result = 2;
+}
+
+message Photo {
+    uint64 photo_id = 1;
+    string url = 2;
+    uint64 create_at = 3; // 客户端可以需要按照创建时间分类
+}
+
+message GetAlbumPhotosReq {
+    uint64 uid = 1;
+}
+
+message GetAlbumPhotosResp {
+     repeated Photo photo_info = 1;
+}
+
+message GetAlbumPhotosBatchReq {
+    repeated uint64 uids = 1;
+}
+
+message PhotoList {
+    repeated Photo photo_info = 1;
+}
+
+message GetAlbumPhotosBatchResp {
+    map<uint64, PhotoList> photos_map = 1;
+}
+
+message DeleteAlbumPhotosReq {
+    uint64 uid = 1;
+    repeated uint64 photo_id = 2;
+}
+message DeleteAlbumPhotosResp {}
+
+message GetAlbumPhotoCountReq {
+    uint64 uid = 1;
+}
+
+message GetAlbumPhotoCountResp {
+    uint32 count = 1;
+}
+
+message OtherUrl {
+    DownloadUrl url = 1;
+}
