@@ -3,8 +3,11 @@ package parser
 import (
 	"errors"
 	"fmt"
-	"gather/toolkitcl/demon/goctl/genproject/rpc"
+	"gather/toolkitcl/demon/goctl/util"
 	"github.com/jhump/protoreflect/desc/protoparse"
+	"log"
+	"path"
+	"path/filepath"
 	"strings"
 
 	"github.com/jhump/protoreflect/desc"
@@ -17,6 +20,10 @@ type (
 
 )
 
+type ProtoDescriptor struct {
+	Descriptor map[string]*desc.FileDescriptor
+}
+
 var (
 	errIllegalPath = errors.New("the proto path is illegal")
 
@@ -24,13 +31,28 @@ var (
 // path是指定到proto文件
 func NewDefaultProtoParser(paths []string) (*defaultProtoParser, error)  {
 	// TODO Check the file path validity
+	realPaths := make([]string, 0, len(paths))
 	for _, v := range paths {
+		var (
+			pathStr string
+			err error
+		)
 		if !strings.Contains(v, ".proto") {
 			return nil, errIllegalPath
 		}
+
+		if !path.IsAbs(v) {
+			pathStr, err =filepath.Abs(v)
+			if err != nil {
+				log.Printf("get bas error: %v", err)
+				continue
+			}
+			realPaths = append(realPaths, pathStr)
+		}
 	}
 
-	return &defaultProtoParser{FilePaths: paths}, nil
+
+	return &defaultProtoParser{FilePaths: realPaths}, nil
 }
 
 func (p *defaultProtoParser) Parse() (map[string]*desc.FileDescriptor, error) {
@@ -46,7 +68,7 @@ func (p *defaultProtoParser) parse() (map[string]*desc.FileDescriptor, error) {
 	}
 	fileDescriptorMap := make(map[string]*desc.FileDescriptor)
 	for i, v := range p.FilePaths {
-		protoFileName := rpc.GetProtoName(v)
+		protoFileName := util.GetProtoName(v)
 		fmt.Printf("proto file name %s\n", protoFileName)
 		fileDescriptorMap[protoFileName] = fileDescriptors[i]
 	}

@@ -1,4 +1,4 @@
-module gather/tool-kitcl
+module gather/toolkitcl
 
 go 1.12
 
@@ -21,7 +21,7 @@ replace (
 	golang.org/x/tools => github.com/golang/tools v0.0.0-20180221164845-07fd8470d635
 	google.golang.org/appengine => github.com/golang/appengine v1.1.0
 	google.golang.org/genproto => github.com/google/go-genproto v0.0.0-20190307195333-5fe7a883aa19
-	google.golang.org/grpc => github.com/grpc/grpc-go v1.26.0
+	google.golang.org/grpc => github.com/grpc/grpc-go v1.33.1
 	gopkg.in/alecthomas/kingpin.v2 => github.com/alecthomas/kingpin v2.2.6+incompatible
 	gopkg.in/go-playground/assert.v1 => github.com/go-playground/assert v1.2.1 // indirect
 	gopkg.in/go-playground/validator.v8 => github.com/go-playground/validator v8.18.2+incompatible // indirect
@@ -34,13 +34,14 @@ replace (
 
 require (
 	github.com/0x5010/grpcp v0.0.0-20180912032145-6d4772332891
-	github.com/golang/protobuf v1.3.2
+	github.com/golang/protobuf v1.4.2
+	github.com/jhump/protoreflect v1.8.1
 	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
 	github.com/panjf2000/ants/v2 v2.3.1
 	github.com/panjf2000/gnet v1.0.0
-	github.com/stretchr/testify v1.5.1 // indirect
-	golang.org/x/net v0.0.0-20191004110552-13f9640d40b9 // indirect
-	google.golang.org/grpc v1.26.0
+	github.com/stretchr/testify v1.5.1
+	google.golang.org/grpc v1.27.0
+	google.golang.org/protobuf v1.25.1-0.20200805231151-a709e31e5d12
 	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect
 	gopkg.in/yaml.v2 v2.2.8 // indirect
 
