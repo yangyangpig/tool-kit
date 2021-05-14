@@ -21,9 +21,9 @@ type (
 		maxAge time.Duration // 控制池子中，元素的最大生命周期
 		lock sync.Locker // 互斥锁
 		cond *sync.Cond // 协程同步
-		head *node
-		create func() interface{}
-		destroy func(interface{})
+		head *node // 单向链表
+		create func() interface{} // 外部定义创建方法
+		destroy func(interface{}) // 外部定义删除方法
 	}
 )
 

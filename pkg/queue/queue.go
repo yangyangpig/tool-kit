@@ -2,7 +2,7 @@ package queue
 
 import (
 	"fmt"
-	"gather/tool-kitcl/pkg/threading"
+	"gather/toolkitcl/pkg/threading"
 	"runtime"
 	"sync"
 	"sync/atomic"
