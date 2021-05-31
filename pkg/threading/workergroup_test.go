@@ -36,3 +36,9 @@ func RoutineId() uint64 {
 
 	return n
 }
+
+// 测试一下数组裁剪通用逻辑
+
+type Elem struct {
+
+}
