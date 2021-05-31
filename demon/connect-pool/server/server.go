@@ -2,7 +2,7 @@ package server
 
 import (
 	"context"
-	"gather/tool-kitcl/demon/connect-pool/protocbuf"
+	tool_pkg_pool "gather/toolkitcl/demon/connect-pool/protocbuf"
 )
 
 type HelloWorld struct {
