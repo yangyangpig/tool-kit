@@ -31,9 +31,7 @@ func (g *RoutineGroup) RunSafe(fn func()) {
 
 	go func() {
 		defer func() {
-			if p := recover(); p != nil {
-
-			}
+			Recover()
 		}()
 
 		defer g.waitGroup.Done()
