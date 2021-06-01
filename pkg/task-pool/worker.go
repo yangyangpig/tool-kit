@@ -7,7 +7,7 @@ type Worker struct {
 
 func NewWorker(p PoolInterface, taskCap int) *Worker {
 	return &Worker{
-		taskChan: make(chan Handle, 1), // 指定的大小
+		taskChan: make(chan Handle, taskCap), // 指定的大小
 		p:        p,
 	}
 }
@@ -16,6 +16,7 @@ func (w *Worker) Start() {
 	go func() {
 		for {
 			handle, ok := <-w.taskChan
+			// TODO 可以考虑taskChan被close时候处理
 			if !ok {
 				break
 			}

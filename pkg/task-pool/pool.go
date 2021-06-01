@@ -64,7 +64,7 @@ func (p *Pool) Fill(handle Handle) {
 	p.m.Unlock()
 
 	if w == nil {
-		w = NewWorker(p, taskChanCap)
+		w = NewWorker(p, taskChanCap) // 可以考虑使用sync.pool存储这个worker，避免多次声明对象，减少gc压力
 		w.Start()
 		p.IncrementBusyWorkerNum()
 		p.DecrementIdleWorkerNum()
