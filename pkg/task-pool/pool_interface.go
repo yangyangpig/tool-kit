@@ -12,6 +12,9 @@ type PoolInterface interface {
 	DecrementIdleWorkerNum()
 	IncrementBusyWorkerNum()
 	DecrementBusyWorkerNum()
+	RevertWorker(worker *Worker) bool
+	PutWorkerCache(worker *Worker)
+	SignalCond()
 }
 
 var taskChanCap = func() int {

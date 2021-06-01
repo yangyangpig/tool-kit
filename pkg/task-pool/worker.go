@@ -14,6 +14,13 @@ func NewWorker(p PoolInterface, taskCap int) *Worker {
 
 func (w *Worker) Start() {
 	go func() {
+		// TODO 考虑放回的处理逻辑
+		defer func() {
+			w.p.DecrementBusyWorkerNum()
+			w.p.PutWorkerCache(w)
+			// TODO 处理pain的recover
+			w.p.SignalCond()
+		}()
 		for {
 			handle, ok := <-w.taskChan
 			// TODO 可以考虑taskChan被close时候处理
@@ -21,10 +28,12 @@ func (w *Worker) Start() {
 				break
 			}
 			handle()
+			if ok := w.p.RevertWorker(w); ok {
+				return
+			}
 		}
 
 	}()
-	w.p.IncrementIdleWorkerNum()
 }
 
 func (w *Worker) Stop() {
@@ -34,3 +43,5 @@ func (w *Worker) Stop() {
 func (w *Worker) Go(handle Handle) {
 	w.taskChan <- handle
 }
+
+
