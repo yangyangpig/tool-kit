@@ -5,6 +5,7 @@ import (
 	"sync/atomic"
 )
 
+// 这个pool主要是用来处理task，可以发送task到pool，然后就不控制了
 type Pool struct {
 	m              sync.Mutex
 	idleWorkerNum  int64
@@ -38,7 +39,7 @@ func NewPool(modOptions ...ModOption) (PoolInterface, error) {
 	initPool := &Pool{idleWorkerList: make([]*Worker, 0)} // 临时值
 	for i := 0; i < option.InitWorkerNum; i++ {
 		// 创建没有handle的channel的
-		w := NewWorker(initPool)
+		w := NewWorker(initPool,taskChanCap)
 		// 启动worker的协程
 		w.Start()
 		initPool.idleWorkerList = append(initPool.idleWorkerList, w)
@@ -63,7 +64,7 @@ func (p *Pool) Fill(handle Handle) {
 	p.m.Unlock()
 
 	if w == nil {
-		w = NewWorker(p)
+		w = NewWorker(p, taskChanCap)
 		w.Start()
 		p.IncrementBusyWorkerNum()
 		p.DecrementIdleWorkerNum()

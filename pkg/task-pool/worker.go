@@ -5,9 +5,9 @@ type Worker struct {
 	p        PoolInterface
 }
 
-func NewWorker(p PoolInterface) *Worker {
+func NewWorker(p PoolInterface, taskCap int) *Worker {
 	return &Worker{
-		taskChan: make(chan Handle, 1),
+		taskChan: make(chan Handle, 1), // 指定的大小
 		p:        p,
 	}
 }
