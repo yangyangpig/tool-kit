@@ -42,6 +42,7 @@ func MapReduce(generate GenerateFunc, mapper MapperFunc, reducer ReducerFunc,
 	// 生产数据
 	rawData := processRawData(generate)
 
+	fmt.Printf("process raw data %d\n", rawData)
 	return MapReduceWithRawData(rawData, mapper, reducer, opts...)
 }
 
@@ -59,12 +60,11 @@ func MapReduceWithRawData(rawData <-chan interface{},
 	mapper MapperFunc, reducer ReducerFunc, opts ...Option) (interface{}, error) {
 	options := buildOptions(opts...)
 	output := make(chan interface{}, options.routines)
-
 	collector := make(chan interface{}, options.routines)
 
 	done := NewDoneChan()
 
-	pipeline := NewPipeLine(output, done.Done()) //output作为pipe的channel
+	outputPipeline := NewPipeLine(output, done.Done()) //output作为pipe的channel
 
 	var closeOnce sync.Once
 	var logVal AtomicStoreErr
@@ -78,7 +78,7 @@ func MapReduceWithRawData(rawData <-chan interface{},
 
 	cancel := once(func(err error) {
 		if err != nil {
-			// TODO 对错误的处理,error可以是自定义的方法
+			fmt.Printf("cacel happen error: %+v", err)
 			logVal.Set(err)
 		} else {
 			logVal.Set(ErrDefaultCancelWithNil)
@@ -96,12 +96,13 @@ func MapReduceWithRawData(rawData <-chan interface{},
 				finish()
 			}
 		}()
-		reducer(collector, pipeline, cancel)
+		reducer(collector, outputPipeline, cancel)
 		drain(collector)
 	}()
 
 	// 执行mapper
 	go executeMapper(func(item interface{}, w Write) {
+		fmt.Printf("execute mapper %+v\n", item)
 		mapper(item, w, cancel)
 	}, rawData, collector, done.Done(), options.routines)
 
@@ -109,6 +110,7 @@ func MapReduceWithRawData(rawData <-chan interface{},
 
 	if err := logVal.Load(); err != nil {
 		// TODO 打印日志，从外层输出日志内容
+		fmt.Printf("happen error: %+v", err)
 		return nil, err
 	} else if ok {
 		// 外层需要对value进行断言
@@ -129,7 +131,7 @@ func executeMapper(mapper MapFunc, input <-chan interface{}, collector chan<- in
 
 	launcher := make(chan SinglePlaceholderType, routines)
 
-	pipe := NewPipeLine(collector, done)
+	collectorPipe := NewPipeLine(collector, done)
 
 	for {
 		select {
@@ -147,12 +149,14 @@ func executeMapper(mapper MapFunc, input <-chan interface{}, collector chan<- in
 				defer func() {
 					if p := recover(); p != nil {
 						// TODO
-
+						fmt.Printf("mapper defer happen error: %+v", p)
 					}
 					wg.Done()
 					<-launcher
 				}()
-				mapper(item, pipe)
+				fmt.Printf("mapper run here: %+v\n", item)
+
+				mapper(item, collectorPipe)
 			}()
 		}
 	}
