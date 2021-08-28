@@ -158,7 +158,7 @@ type trackedConn struct {
 	retry   int
 	cannel  context.CancelFunc
 }
-
+// 探针
 func (tc *trackedConn) tryconn(ctx context.Context, force bool) error {
 	tc.Lock()
 	defer tc.Unlock()
