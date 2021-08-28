@@ -19,16 +19,17 @@ replace (
 
 require (
 	github.com/0x5010/grpcp v0.0.0-20180912032145-6d4772332891
+	github.com/casbin/casbin/v2 v2.36.1
+	github.com/casbin/redis-adapter/v2 v2.1.0 // indirect
 	github.com/golang/protobuf v1.4.3
 	github.com/jhump/protoreflect v1.8.1
 	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
 	github.com/panjf2000/ants/v2 v2.3.1
 	github.com/panjf2000/gnet v1.0.0
-	github.com/stretchr/testify v1.5.1
+	github.com/stretchr/testify v1.6.1
 	google.golang.org/grpc v1.36.0
 	google.golang.org/grpc/examples v0.0.0-20210513010352-dc77d7ffe311
 	google.golang.org/protobuf v1.25.1-0.20200805231151-a709e31e5d12
 	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect
 	gopkg.in/yaml.v2 v2.2.8 // indirect
-
 )
