@@ -1,0 +1,19 @@
+syntax = "proto3";
+package main;
+option go_package = "domain/mall";
+
+service Mall {
+  rpc SetGoods(SetGoodsReq) returns (SetGoodsResp);
+
+}
+
+message GoodsInfo {
+  uint64 id = 1;
+  string name = 2;
+  float price = 3;
+}
+message SetGoodsReq {
+  GoodsInfo goods_info = 1;
+}
+
+message SetGoodsResp {}
