@@ -1,4 +1,6 @@
 package server
 
 // 这一层对外提供得服务，领域服务
-// 依赖关系：可以调用infrastructure、internal
+// 依赖关系：主要是调用internal中领域聚合根或者实体，对外提供领域服务能力
+
+//
