@@ -1,4 +1,4 @@
-module gather/toolkitcl
+module toolkit
 
 go 1.12
 
@@ -20,14 +20,18 @@ replace (
 require (
 	github.com/0x5010/grpcp v0.0.0-20180912032145-6d4772332891
 	github.com/casbin/casbin/v2 v2.36.1
-	github.com/golang/protobuf v1.4.3
+	github.com/golang/protobuf v1.5.0
 	github.com/jhump/protoreflect v1.8.1
 	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
 	github.com/panjf2000/ants/v2 v2.3.1
 	github.com/panjf2000/gnet v1.0.0
-	github.com/stretchr/testify v1.6.1
+	github.com/stretchr/testify v1.7.0
+	golang.org/x/net v0.0.0-20210614182718-04defd469f4e // indirect
+	golang.org/x/sys v0.0.0-20211205182925-97ca703d548d // indirect
+	google.golang.org/genproto v0.0.0-20210513213006-bf773b8c8384 // indirect
 	google.golang.org/grpc v1.36.0
 	google.golang.org/grpc/examples v0.0.0-20210513010352-dc77d7ffe311
-	google.golang.org/protobuf v1.25.1-0.20200805231151-a709e31e5d12
+	google.golang.org/protobuf v1.26.0
 	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect
+	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )
