@@ -22,7 +22,9 @@ require (
 	github.com/allegro/bigcache/v3 v3.0.2
 	github.com/casbin/casbin/v2 v2.36.1
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/gagliardetto/solana-go v1.4.0 // indirect
+	github.com/gagliardetto/binary v0.6.1 // indirect
+	github.com/gagliardetto/solana-go v1.5.0 // indirect
+	github.com/gagliardetto/treeout v0.1.4 // indirect
 	github.com/golang/protobuf v1.5.0
 	github.com/jhump/protoreflect v1.8.1
 	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect

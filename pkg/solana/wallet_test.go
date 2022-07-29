@@ -25,7 +25,7 @@ func Test_CreateWallet(t *testing.T) {
 }
 
 func Test_GetBalance(t *testing.T) {
-	myWallet.GetBalance(solana.MustPublicKeyFromBase58("AUJTadTPH9fCeV2egpcWfmJF2gSLTukXZd414RPRmuiX"))
+	myWallet.GetBalance(solana.MustPublicKeyFromBase58("GDiHmJFergf2pFPSkpAQNNMqwPQbhbG1cU4ULoeKx3ff"))
 }
 
 func Test_AccountInfo(t *testing.T) {

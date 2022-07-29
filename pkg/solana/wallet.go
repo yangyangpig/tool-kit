@@ -139,7 +139,7 @@ func (w *Wallet) transfer(fromAccount solana.PrivateKey, toAccountPubKey solana.
 
 }
 
-//
+
 
 func getRealSol(balanceInfo *rpc.GetBalanceResult) *big.Float {
 	var lamportsOnAccount = new(big.Float).SetUint64(uint64(balanceInfo.Value))
