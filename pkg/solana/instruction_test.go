@@ -36,15 +36,16 @@ const (
 func Test_HandleOnChain(t *testing.T) {
 	fromAccountPub := solana.MustPublicKeyFromBase58("5JThDmMMbc7QKRLuNkcqEoVAcDv6LyGqifveSRDe9FQW")
 	fromAccountPrivate := solana.MustPrivateKeyFromBase58("4uRpmrXMToJs55d15bhzzxDnNKeW2buYW6Xdn1AThs1fdmKnrV5mkmkp4K6zVY9W1oYpLUGKPwXJi5rSAoUe3Ygi")
-	toAccountPubKey := solana.MustPublicKeyFromBase58("AUJTadTPH9fCeV2egpcWfmJF2gSLTukXZd414RPRmuiX")
+	playerprivate := solana.MustPrivateKeyFromBase58("isDH5DXkvT2SUZE1QLeia7xWUiin2hbfuRwarBgT8eNEXzfJqYxGYRgjuFPmVXusXCFxSE89cPLUoQrnoAn759b")
+	playerPubKey := solana.MustPublicKeyFromBase58("GDiHmJFergf2pFPSkpAQNNMqwPQbhbG1cU4ULoeKx3ff")
 	stateAccount := solana.NewWallet()
 	//toAccountInstr, _ := solanaInstruct.CreateAccInstr(stateAccount, AccessControllerStateAccountSize, toAccountPubKey, fromAccountPub)
 	err := solanaInstruct.TXSync(
 		"Hello OnChain",
 		rpc.CommitmentFinalized,
 		[]solana.Instruction{
-			update_data.NewInitializeInstruction(3000, stateAccount.PublicKey(), fromAccountPub,
-				toAccountPubKey).Build(),
+			update_data.NewInitializeInstruction(300000, stateAccount.PublicKey(), fromAccountPub,
+				solana.SystemProgramID).Build(),
 		},
 		func(key solana.PublicKey) *solana.PrivateKey {
 			if key.Equals(fromAccountPub) {
@@ -53,9 +54,12 @@ func Test_HandleOnChain(t *testing.T) {
 			if key.Equals(stateAccount.PublicKey()) {
 				return &stateAccount.PrivateKey
 			}
+			if key.Equals(playerPubKey) {
+				return &playerprivate
+			}
 			return nil
 		},
-		fromAccountPub,
+		playerPubKey,
 	)
 	if err != nil {
 		log.Fatal(err)

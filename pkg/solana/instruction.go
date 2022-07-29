@@ -37,7 +37,6 @@ func (s *Instruction) TXSync(name string, commitment rpc.CommitmentType, instr [
 		log.Fatalf("GetRecentBlockhash happen error %+v", err)
 		return err
 	}
-	log.Println("come here-------------------------")
 	tx, err := solana.NewTransaction(
 		instr,
 		recent.Value.Blockhash,
@@ -49,7 +48,6 @@ func (s *Instruction) TXSync(name string, commitment rpc.CommitmentType, instr [
 	}
 	log.Println("tx")
 	//spew.Dump(tx)
-	log.Println("tx come here-------------------------")
 	if _, err = tx.EncodeTree(text.NewTreeEncoder(os.Stdout, name)); err != nil {
 		log.Fatalf("EncodeTree happen error %+v", err)
 		return err
@@ -57,7 +55,6 @@ func (s *Instruction) TXSync(name string, commitment rpc.CommitmentType, instr [
 	if _, err = tx.Sign(signerFunc); err != nil {
 		return err
 	}
-	log.Println("sing come here-------------------------")
 	sig, err := s.solanaCli.SendTransactionWithOpts(
 		context.Background(),
 		tx,
