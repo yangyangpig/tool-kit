@@ -2,6 +2,7 @@ package solana
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"reflect"
 
@@ -37,6 +38,7 @@ func (s *Instruction) TXSync(name string, commitment rpc.CommitmentType, instr [
 		log.Fatalf("GetRecentBlockhash happen error %+v", err)
 		return err
 	}
+	spew.Dump(instr)
 	tx, err := solana.NewTransaction(
 		instr,
 		recent.Value.Blockhash,
@@ -103,6 +105,56 @@ func (s *Instruction) CreateAccInstr(acc *solana.Wallet, accSize uint64,
 		payer,
 		acc.PublicKey(),
 	).Build(), nil
+}
+
+func (s *Instruction) AirDropAndBalance(account solana.PublicKey, num uint64) error {
+
+	// 投放5sol币到新账号
+	out, err := s.solanaCli.RequestAirdrop(context.TODO(), account, solana.LAMPORTS_PER_SOL*num, rpc.CommitmentFinalized)
+	if err != nil {
+		log.Fatalf("airdrop happen error %+v", err)
+		return err
+	}
+
+	fmt.Println("airdrop transaction signature:", out)
+
+	return nil
+}
+
+// 创建子账号
+func CreateSeedInstruction(payerAccount *solana.Wallet, programPubKey solana.PublicKey, name string) (solana.Instruction, error) {
+	newSubAccount, err := solana.CreateWithSeed(
+		payerAccount.PublicKey(),
+		name,
+		programPubKey,
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	instruction := system.NewCreateAccountWithSeedInstruction(
+		payerAccount.PublicKey(),
+		name,
+		918720,
+		12,
+		programPubKey,
+		payerAccount.PublicKey(),
+		newSubAccount,
+		payerAccount.PublicKey(),
+	).Build()
+	return instruction, nil
+}
+
+func CreateSeedAccount(payerAccount *solana.Wallet, programPubKey solana.PublicKey, name string) (out solana.PublicKey, err error) {
+	out, err = solana.CreateWithSeed(
+		payerAccount.PublicKey(),
+		name,
+		programPubKey,
+	)
+	if err != nil {
+		return
+	}
+	return
 }
 
 func exampleFromGetTransaction() {

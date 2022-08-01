@@ -17,7 +17,7 @@ func init() {
 func Test_CreateWallet(t *testing.T) {
 
 	account, _ := myWallet.CreateAccount()
-	err := myWallet.AirDropAndBalance(account, 1)
+	err := myWallet.AirDropAndBalance(account, 2)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -45,9 +45,9 @@ func Test_Transfer(t *testing.T) {
 	// toAccount, _ := myWallet.CreateAccount()
 	fromAccount := solana.MustPrivateKeyFromBase58("4uRpmrXMToJs55d15bhzzxDnNKeW2buYW6Xdn1AThs1fdmKnrV5mkmkp4K6zVY9W1oYpLUGKPwXJi5rSAoUe3Ygi")
 	// toAccount := solana.MustPrivateKeyFromBase58("isDH5DXkvT2SUZE1QLeia7xWUiin2hbfuRwarBgT8eNEXzfJqYxGYRgjuFPmVXusXCFxSE89cPLUoQrnoAn759b")
-	toAccount := solana.MustPublicKeyFromBase58("AUJTadTPH9fCeV2egpcWfmJF2gSLTukXZd414RPRmuiX")
+	toAccount := solana.MustPublicKeyFromBase58("GDiHmJFergf2pFPSkpAQNNMqwPQbhbG1cU4ULoeKx3ff")
 	fmt.Println("account public key:", fromAccount.PublicKey())
-	fmt.Println("to account public key:", fromAccount.PublicKey())
+	fmt.Println("to account public key:", toAccount)
 
 	myWallet.transfer(fromAccount, toAccount)
 }

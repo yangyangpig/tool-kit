@@ -34,32 +34,40 @@ const (
 )
 
 func Test_HandleOnChain(t *testing.T) {
-	fromAccountPub := solana.MustPublicKeyFromBase58("5JThDmMMbc7QKRLuNkcqEoVAcDv6LyGqifveSRDe9FQW")
-	fromAccountPrivate := solana.MustPrivateKeyFromBase58("4uRpmrXMToJs55d15bhzzxDnNKeW2buYW6Xdn1AThs1fdmKnrV5mkmkp4K6zVY9W1oYpLUGKPwXJi5rSAoUe3Ygi")
-	playerprivate := solana.MustPrivateKeyFromBase58("isDH5DXkvT2SUZE1QLeia7xWUiin2hbfuRwarBgT8eNEXzfJqYxGYRgjuFPmVXusXCFxSE89cPLUoQrnoAn759b")
-	playerPubKey := solana.MustPublicKeyFromBase58("GDiHmJFergf2pFPSkpAQNNMqwPQbhbG1cU4ULoeKx3ff")
-	stateAccount := solana.NewWallet()
-	//toAccountInstr, _ := solanaInstruct.CreateAccInstr(stateAccount, AccessControllerStateAccountSize, toAccountPubKey, fromAccountPub)
+
+	fromAccount, _ := solana.WalletFromPrivateKeyBase58("4kgmdJWXK3gLdVKJd9oyD2exuuj3k7dvSPBcekhBxAhUCkLHMd7tf65B4JjBjt7agbZUrfuZnJjUm7NfNvRBXtHL")
+	payerAccount, _ := solana.WalletFromPrivateKeyBase58("6rk91t9suXoRvhbRwnviUeiEeo6UcUbWKkaPsERg29Z9h1Tucwkr1pYBXgiHYiUazq7U32DcexthL7MGi1M5U2e")
+	// programId
+	//programIdPubKey := solana.MustPublicKeyFromBase58("AUJTadTPH9fCeV2egpcWfmJF2gSLTukXZd414RPRmuiX")
+	// seedInstruction, _ := CreateSeedInstruction(payerAccount, programIdPubKey, "helloworld")
+	// seedAccount, _ := CreateSeedAccount(payerAccount, programIdPubKey, "helloworld")
+	// fmt.Println("seedAccount", seedAccount)
+	// _ = solanaInstruct.AirDropAndBalance(seedAccount, 1)
+
+	// 首先要创建一个子账号，子账号需要关联合约账号
+	seedAccount := solana.NewWallet()
+	//myAccountInstr, _ := solanaInstruct.CreateAccInstr(seedAccount, TokenAccountSize, programIdPubKey, payerAccount.PublicKey())
 	err := solanaInstruct.TXSync(
 		"Hello OnChain",
 		rpc.CommitmentFinalized,
 		[]solana.Instruction{
-			update_data.NewInitializeInstruction(300000, stateAccount.PublicKey(), fromAccountPub,
+			//myAccountInstr,
+			update_data.NewInitializeInstruction(300, seedAccount.PublicKey(), fromAccount.PublicKey(),
 				solana.SystemProgramID).Build(),
 		},
 		func(key solana.PublicKey) *solana.PrivateKey {
-			if key.Equals(fromAccountPub) {
-				return &fromAccountPrivate
+			if key.Equals(fromAccount.PublicKey()) {
+				return &fromAccount.PrivateKey
 			}
-			if key.Equals(stateAccount.PublicKey()) {
-				return &stateAccount.PrivateKey
+			if key.Equals(payerAccount.PublicKey()) {
+				return &payerAccount.PrivateKey
 			}
-			if key.Equals(playerPubKey) {
-				return &playerprivate
+			if key.Equals(seedAccount.PublicKey()) {
+				return &seedAccount.PrivateKey
 			}
 			return nil
 		},
-		playerPubKey,
+		payerAccount.PublicKey(),
 	)
 	if err != nil {
 		log.Fatal(err)
