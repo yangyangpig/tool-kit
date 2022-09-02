@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package tool.kit;
+option go_package = "kitex/hello";
+
+service HelloWorld {
+    rpc SayHello(HelloRequest) returns (HelloResp);
+}
+
+message HelloRequest {
+    string name = 1;
+}
+
+message HelloResp {
+    string msg = 1;
+    int32 code = 2;
+}
